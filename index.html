@@ -562,6 +562,38 @@
       color: var(--muted);
     }
 
+    .footer-contact {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-contact-label {
+      font-family: var(--mono);
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .footer-contact a {
+      font-size: .875rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-contact a:hover {
+      color: #4f46e5;
+      text-decoration: underline;
+    }
+
     /* ── Fade-in animation ── */
     .fade-in {
       opacity: 0;
@@ -849,6 +881,10 @@
       &lt;<span>medical-sw-dev</span> /&gt; &nbsp;· &nbsp;Built with HTML &amp; CSS
     </div>
     <div class="footer-right">2026 · Portfolio</div>
+    <div class="footer-contact">
+      <span class="footer-contact-label">Contact</span>
+      <a href="mailto:lhs267525@gmail.com">lhs267525@gmail.com</a>
+    </div>
   </footer>
 
   <script>
