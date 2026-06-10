@@ -1354,12 +1354,12 @@
 
     // Active nav highlight
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+    const navLinkItems = document.querySelectorAll('.nav-links a[data-section]');
 
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        navLinks.forEach(l => l.classList.remove('active'));
+        navLinkItems.forEach(l => l.classList.remove('active'));
         const active = document.querySelector(`.nav-links a[data-section="${e.target.id}"]`);
         if (active) active.classList.add('active');
       });
