@@ -71,7 +71,27 @@ gh auth setup-git
 
 ```
 Mypage_0610/
-├── index.html    # 메인 자기소개 페이지
-├── prompt.txt    # 페이지 기획 내용
-└── README.md     # 프로젝트 문서 (현재 파일)
+├── index.html      # 메인 자기소개 페이지
+├── prompt.txt      # 페이지 기획 내용
+├── .gitignore      # Git 추적 제외 설정
+└── README.md       # 프로젝트 문서 (현재 파일)
 ```
+
+---
+
+## 이슈 관리
+
+### ✅ 해결된 이슈
+
+| 날짜 | 이슈 | 해결 방법 |
+|---|---|---|
+| 2026-06-10 | PAT 토큰이 Remote URL에 하드코딩되어 `git push` 불가 | gh CLI 인증 방식으로 전환 ([#1](https://github.com/nebu-25/Mypage_0610/issues/1)) |
+| 2026-06-11 | `.claude/settings.local.json` (Claude Code 설정 파일)이 실수로 커밋·푸시됨 | `git rm --cached`로 추적 해제 후 `.gitignore`에 `.claude/` 추가 |
+| 2026-06-11 | `.gitignore` 미설정으로 내부 도구 파일 노출 위험 | `.gitignore` 신규 생성 완료 |
+
+### 🔶 알려진 이슈 (미해결)
+
+| 우선순위 | 이슈 | 설명 |
+|---|---|---|
+| 중간 | **모바일 레이아웃 미완성** | 일부 섹션에서 모바일 화면 레이아웃 깨짐 |
+| 낮음 | **GitHub Pages 미배포** | 현재 로컬 파일로만 열람 가능, 공개 URL 없음 |
