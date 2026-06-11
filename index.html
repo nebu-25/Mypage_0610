@@ -141,6 +141,74 @@
       gap: 1.25rem;
     }
 
+    /* ── Hamburger ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      width: 34px; height: 34px;
+      cursor: pointer;
+      padding: 6px;
+      transition: border-color .2s, background .2s;
+      flex-shrink: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--muted);
+      border-radius: 2px;
+      transition: transform .3s ease, opacity .3s ease, background .2s;
+      transform-origin: center;
+    }
+
+    .hamburger:hover {
+      border-color: var(--accent);
+      background: var(--tag-bg);
+    }
+
+    .hamburger:hover span { background: var(--accent); }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 680px) {
+      .hamburger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(var(--nav-h) - 1px);
+        left: 0; right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        gap: 0;
+        padding: .5rem 0;
+        z-index: 99;
+      }
+
+      .nav-links.open { display: flex; }
+
+      .nav-links li { width: 100%; }
+
+      .nav-links a {
+        display: block;
+        padding: .85rem clamp(1.5rem, 5vw, 5rem);
+        font-size: .9rem;
+      }
+
+      .nav-links a::after { display: none; }
+    }
+
     .theme-toggle {
       background: none;
       border: 1.5px solid var(--border);
@@ -494,6 +562,33 @@
 
     .stack-dot.filled { background: var(--accent); }
 
+    /* ── Stack skill tooltip ── */
+    .stack-skill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .skill-pct {
+      font-family: var(--mono);
+      font-size: .68rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--tag-bg);
+      padding: .1rem .45rem;
+      border-radius: 5px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .2s ease, transform .2s ease;
+      white-space: nowrap;
+    }
+
+    .stack-item:hover .skill-pct {
+      opacity: 1;
+      transform: none;
+    }
+
     /* ── [4] Study → Timeline ── */
     .timeline {
       display: flex;
@@ -811,13 +906,16 @@
   <nav>
     <a href="#hero" class="nav-logo">dev.portfolio</a>
     <div class="nav-right">
-      <ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="#about"    data-section="about">About</a></li>
         <li><a href="#stack"    data-section="stack">Stack</a></li>
         <li><a href="#study"    data-section="study">Study</a></li>
         <li><a href="#interest" data-section="interest">Interests</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="테마 전환">🌙</button>
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
@@ -943,12 +1041,15 @@
           <div class="stack-body">
             <div class="stack-name">HTML</div>
             <div class="stack-desc">웹 구조 마크업</div>
-            <div class="stack-dots">
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot"></div>
+            <div class="stack-skill">
+              <div class="stack-dots">
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot"></div>
+              </div>
+              <span class="skill-pct">80%</span>
             </div>
           </div>
         </div>
@@ -958,12 +1059,15 @@
           <div class="stack-body">
             <div class="stack-name">JavaScript</div>
             <div class="stack-desc">동적 웹 개발</div>
-            <div class="stack-dots">
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot"></div>
-              <div class="stack-dot"></div>
+            <div class="stack-skill">
+              <div class="stack-dots">
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot"></div>
+                <div class="stack-dot"></div>
+              </div>
+              <span class="skill-pct">60%</span>
             </div>
           </div>
         </div>
@@ -973,12 +1077,15 @@
           <div class="stack-body">
             <div class="stack-name">Java</div>
             <div class="stack-desc">백엔드 / 애플리케이션</div>
-            <div class="stack-dots">
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot"></div>
+            <div class="stack-skill">
+              <div class="stack-dots">
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot"></div>
+              </div>
+              <span class="skill-pct">80%</span>
             </div>
           </div>
         </div>
@@ -988,12 +1095,15 @@
           <div class="stack-body">
             <div class="stack-name">Python</div>
             <div class="stack-desc">데이터 분석 / 스크립트</div>
-            <div class="stack-dots">
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot"></div>
-              <div class="stack-dot"></div>
+            <div class="stack-skill">
+              <div class="stack-dots">
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot"></div>
+                <div class="stack-dot"></div>
+              </div>
+              <span class="skill-pct">60%</span>
             </div>
           </div>
         </div>
@@ -1003,12 +1113,15 @@
           <div class="stack-body">
             <div class="stack-name">Oracle DB</div>
             <div class="stack-desc">관계형 데이터베이스</div>
-            <div class="stack-dots">
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot filled"></div>
-              <div class="stack-dot"></div>
-              <div class="stack-dot"></div>
+            <div class="stack-skill">
+              <div class="stack-dots">
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot filled"></div>
+                <div class="stack-dot"></div>
+                <div class="stack-dot"></div>
+              </div>
+              <span class="skill-pct">60%</span>
             </div>
           </div>
         </div>
@@ -1149,6 +1262,25 @@
   <a href="#hero" id="back-top" aria-label="맨 위로">↑</a>
 
   <script>
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+    });
+
+    // Close nav when a link is clicked
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
     // [D1] Dark mode toggle
     const html = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
@@ -1222,12 +1354,12 @@
 
     // Active nav highlight
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+    const navLinkItems = document.querySelectorAll('.nav-links a[data-section]');
 
     const navObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        navLinks.forEach(l => l.classList.remove('active'));
+        navLinkItems.forEach(l => l.classList.remove('active'));
         const active = document.querySelector(`.nav-links a[data-section="${e.target.id}"]`);
         if (active) active.classList.add('active');
       });
